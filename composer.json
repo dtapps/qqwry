@@ -3,7 +3,8 @@
   "description": "纯真IP数据库",
   "keywords": [
     "liguangchun",
-    "qqwry"
+    "qqwry",
+    "ip"
   ],
   "type": "library",
   "license": "MIT",
