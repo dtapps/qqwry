@@ -3,12 +3,11 @@
  * (c) Chaim <gc@dtapp.net>
  */
 
-
 namespace DtApp\QqWry;
 
 /**
+ * 纯真IP数据库
  * 参考zt/qqwry
- * Class Client
  * @package DtApp\QqWry
  */
 class Client
@@ -52,6 +51,10 @@ class Client
         "安徽省", "浙江省", "江苏省", "福建省", "广东省", "海南省", "四川省", "云南省", "贵州省", "青海省", "甘肃省",
         "江西省", "台湾省", "内蒙古", "宁夏", "新疆", "西藏", "广西", "北京市", "上海市", "天津市", "重庆市", "香港", "澳门"];
 
+    /**
+     * 不存在
+     * @var string
+     */
     private $unknown = '未知';
 
     /**
@@ -112,6 +115,7 @@ class Client
      * 获取省信息
      * @param string $ip
      * @return mixed
+     * @throws QqWryException
      */
     public function getProvince($ip = '')
     {
@@ -122,6 +126,7 @@ class Client
      * 获取城市信息
      * @param string $ip
      * @return mixed
+     * @throws QqWryException
      */
     public function getCity($ip = '')
     {
@@ -132,6 +137,7 @@ class Client
      * 获取地区信息
      * @param string $ip
      * @return mixed
+     * @throws QqWryException
      */
     public function getArea($ip = '')
     {
@@ -142,6 +148,7 @@ class Client
      * 获取运营商信息
      * @param string $ip
      * @return mixed
+     * @throws QqWryException
      */
     public function getExtend($ip = '')
     {
@@ -152,6 +159,7 @@ class Client
      * 根据所给 IP 地址或域名返回所在地区信息
      * @param string $ip
      * @return mixed|null
+     * @throws QqWryException
      */
     public function getLocation($ip = '')
     {
@@ -162,7 +170,7 @@ class Client
         }
         static $locationData = [];
         if (!isset($locationData[$ip])) {
-            if (!$this->fp) return null;            // 如果数据文件没有被正确打开，则直接返回空
+            if (!$this->fp) throw new QqWryException('数据库文件不存在!');            // 如果数据文件没有被正确打开，则直接返回错误
             $location['ip'] = $ip;   // 将输入的域名转化为IP地址
             $ip = $this->packIp($location['ip']);   // 将输入的IP地址转化为可比较的IP地址
             // 不合法的IP地址会被转化为255.255.255.255
