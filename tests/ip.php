@@ -8,5 +8,13 @@ use DtApp\QqWry\Client;
 require_once '../vendor/autoload.php';
 
 $ip = new Client();
-var_dump($ip->getlocation('www.baidu.com'));
-var_dump($ip->getlocation('127.0.0.1'));
+// 查询位置信息
+var_dump($ip->getLocation('116.7.97.38'));
+// 查询省份信息
+var_dump($ip->getProvince('116.7.97.38'));
+// 查询城市信息
+var_dump($ip->getCity('116.7.97.38'));
+// 查询地区信息
+var_dump($ip->getArea('116.7.97.38'));
+// 查询运营商信息
+var_dump($ip->getExtend('116.7.97.38'));

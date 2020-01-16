@@ -13,6 +13,10 @@
 
 1. PHP7.0 版本及以上（低版本和7.4版本未做兼容处理！）
 
+## 使用文档
+
+[文档链接][https://apidoc.dtapp.net/web/#/8]
+
 ## 安装
 
 ```text
@@ -30,3 +34,6 @@ composer update liguangchun/qqwry -vvv
 ```text
 composer remove liguangchun/qqwry -vvv
 ```
+
+
+[https://apidoc.dtapp.net/web/#/8]: https://apidoc.dtapp.net/web/#/8

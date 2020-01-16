@@ -118,16 +118,31 @@ class Client
         return $this->getLocation($ip)['state'];
     }
 
+    /**
+     * 获取城市信息
+     * @param string $ip
+     * @return mixed
+     */
     public function getCity($ip = '')
     {
         return $this->getLocation($ip)['city'];
     }
 
+    /**
+     * 获取地区信息
+     * @param string $ip
+     * @return mixed
+     */
     public function getArea($ip = '')
     {
         return $this->getLocation($ip)['area'];
     }
 
+    /**
+     * 获取运营商信息
+     * @param string $ip
+     * @return mixed
+     */
     public function getExtend($ip = '')
     {
         return $this->getLocation($ip)['extend'];
@@ -135,9 +150,8 @@ class Client
 
     /**
      * 根据所给 IP 地址或域名返回所在地区信息
-     * @access public
      * @param string $ip
-     * @return array
+     * @return mixed|null
      */
     public function getLocation($ip = '')
     {
@@ -211,12 +225,9 @@ class Client
                     $location['extend'] = $this->getExtendString();
                     break;
             }
-            if (trim($location['all']) == 'CZ88.NET') {  // CZ88.NET表示没有有效信息
-                $location['all'] = $this->unknown;
-            }
-            if (trim($location['extend']) == 'CZ88.NET') {
-                $location['extend'] = '';
-            }
+            // CZ88.NET表示没有有效信息
+            if (trim($location['all']) == 'CZ88.NET') $location['all'] = $this->unknown;
+            if (trim($location['extend']) == 'CZ88.NET') $location['extend'] = '';
             $location['all'] = iconv("gb2312", "UTF-8//IGNORE", $location['all']);
             $location['extend'] = iconv("gb2312", "UTF-8//IGNORE", $location['extend']);
             $location['extend'] = $location['extend'] === null ? '' : $location['extend'];
@@ -233,9 +244,7 @@ class Client
      * 解析省市区县
      * @param $location
      * @return array
-     *
-     * @example '江苏省苏州市吴江市' , '江苏省苏州市吴中区' , '江苏省苏州市昆山市' , '黑龙江省鸡西市' , '广西桂林市' , '陕西省西安市户县' , '河南省开封市通许县' ,
-     *   '内蒙古呼伦贝尔市海拉尔区','甘肃省白银市平川区','孟加拉','上海市' , '北京市朝阳区' ,'美国' ,'香港' ,  俄罗斯' ,'IANA'
+     * @example '江苏省苏州市吴江市' , '江苏省苏州市吴中区' , '江苏省苏州市昆山市' , '黑龙江省鸡西市' , '广西桂林市' , '陕西省西安市户县' , '河南省开封市通许县' ,'内蒙古呼伦贝尔市海拉尔区','甘肃省白银市平川区','孟加拉','上海市' , '北京市朝阳区' ,'美国' ,'香港' ,  俄罗斯' ,'IANA'
      */
     private function parseLocation($location)
     {
@@ -260,9 +269,7 @@ class Client
 
     /**
      * 返回读取的长整型数
-     *
-     * @access private
-     * @return int
+     * @return mixed
      */
     private function getLong()
     {
@@ -273,9 +280,7 @@ class Client
 
     /**
      * 返回读取的3个字节的长整型数
-     *
-     * @access private
-     * @return int
+     * @return mixed
      */
     private function getLong3()
     {
@@ -286,10 +291,8 @@ class Client
 
     /**
      * 返回压缩后可进行比较的IP地址
-     *
-     * @access private
-     * @param string $ip
-     * @return string
+     * @param $ip
+     * @return false|string
      */
     private function packIp($ip)
     {
@@ -317,8 +320,6 @@ class Client
 
     /**
      * 返回地区信息
-     *
-     * @access private
      * @return string
      */
     private function getExtendString()
@@ -342,13 +343,10 @@ class Client
 
     /**
      * 析构函数，用于在页面执行结束后自动关闭打开的文件。
-     *
      */
     public function __destruct()
     {
-        if ($this->fp) {
-            fclose($this->fp);
-        }
+        if ($this->fp) fclose($this->fp);
         $this->fp = 0;
     }
 }
