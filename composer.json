@@ -6,6 +6,7 @@
     "qqwry",
     "ip"
   ],
+  "time": "2020-01-16",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -26,10 +27,6 @@
     }
   },
   "repositories": {
-    "0": {
-      "type": "composer",
-      "url": "https://packagist.dtapp.net"
-    },
     "packagist": {
       "type": "composer",
       "url": "https://mirrors.aliyun.com/composer/"
